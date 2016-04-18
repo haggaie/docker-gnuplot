@@ -1,12 +1,8 @@
 # convenience gnuplot
-FROM stackbrew/ubuntu:14.04
+FROM alpine:3.3
 MAINTAINER Ivo Jimenez "ivo.jimenez@gmail.com"
 
 # Make sure we are up-to-date
-RUN apt-get update && apt-get install -y gnuplot
+RUN apk add --update gnuplot --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing && rm -rf /var/cache/apk/*
 
-# cleanup
-RUN apt-get clean
-RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-ENTRYPOINT ["/usr/bin/gnuplot"]
+ENTRYPOINT ["gnuplot"]
